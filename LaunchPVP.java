@@ -49,50 +49,47 @@ public class LaunchPVP extends PVPSelect {
         super(menu);
     }
  
+    
+    // This can be used to set up an object so it can be compatible between static and non static variables  
     public static void myPrintScore(boolean myBoardSetUp){
         boardSetUp = myBoardSetUp;
         obj.printScore();
     }
     
+    // same thing as myPrintScore but with the CPU because it links towards the next method printScore() and printScore2()
     public static void CPUPrintScore(boolean myCPUBoardSetUp){
         CPUBoardSetUp = myCPUBoardSetUp;
         obj.printScore2();
     }
     
     public void printScore() {
-        Player1Score += 1;
-        numpairs += 1;
-        setup();
+        Player1Score += 1; // adds towards the score of the first player. 
+        numpairs += 1; // adds a pair so the game can later detect when the game ends. 
+        setup(); // calls set up() again which will draw everything. 
     }
     
     public void printScore2() {
-        Player2Score += 1;
-        numpairs += 1;
-        setup();
+        Player2Score += 1; // adds towards the score if the second player. 
+        numpairs += 1; // adds a pair so the game can later detect when the game ends 
+        setup(); // calls setup() again which will draw everything.
     }
     
     @Override
     public void setup() { //launch game.
         
-    	if (boardSetUp == false) {
+    	if (boardSetUp == false) { // This is to ensure it only draws once after the set up is launched.
 		VBox menuBox5 = new VBox(); 
 		ImageView BGImg = new ImageView("file:C:\\Users\\Aaron\\eclipse-workspace\\CardMatchMemoryGame\\bin\\loopmusicjavaupdated\\behindgame.gif");
 		BGImg.setFitWidth(2000);
 		BGImg.setFitHeight(1000);
 		
-		gamePane.getChildren().add(BGImg);
+		gamePane.getChildren().add(BGImg);					// Add background image which is the gif. 
 		gamePane.getChildren().add(menuBox5);				//Adding the menuBox with the; START, CREDITS, EXIT to the gamepane
     	}
     	
     	
-        /*
-        String filepath = ("C:\\Users\\aaron\\eclipse-workspace\\CardMatchMemoryGame\\src\\Poketheme.wav");
-        musicStuff musicObject = new musicStuff();
-        musicObject.playMusic(filepath);
-    */
         
-        //ImageView BGImg = new ImageView("behindgame2.gif");
-        
+    	// draws all the buttons. 
         Image gameResultImg = new Image("file:C:\\Users\\Aaron\\eclipse-workspace\\CardMatchMemoryGame\\bin\\loopmusicjavaupdated\\player1win.png");
         ImageView grIV = new ImageView(gameResultImg);
     
@@ -105,9 +102,10 @@ public class LaunchPVP extends PVPSelect {
         Button exit = new Button ();                        //Adding a EXIT button
         Button start = new Button();                        //Adding a START button
         
-        
+        // this is the difficulty 4 which will set up the board as it links to the graphics class. 
         if (difficulty == 4) {
         
+        // This lets the game detect the number of pairs so it will know when the game will end and draw out the images. 
         if (numpairs == 8) {
             if (Player1Score > Player2Score) {
                 gameResultImg = new Image("file:C:\\Users\\Aaron\\eclipse-workspace\\CardMatchMemoryGame\\bin\\loopmusicjavaupdated\\player1win.png");
@@ -433,8 +431,10 @@ public class LaunchPVP extends PVPSelect {
            }
        });
        
+       // sets scene with 2000 width and 1000 height to fit my screen. 
        setScene(new Scene( gamePane, 2000, 1000));
        
+       // board set up is true so it won't draw the game again once the score updates. 
        boardSetUp = true;
        
        display();      
